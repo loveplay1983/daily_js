@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+canvas	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var canvas = document.getElementById('myCanvas');$/;"	variable	line:5
+ctx	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var ctx = canvas.getContext('2d');$/;"	variable	line:7
+x	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var x = canvas.width\/2;$/;"	variable	line:9
+y	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var y = canvas.height - 30;$/;"	variable	line:10
+dx	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var dx = 2;$/;"	variable	line:11
+dy	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var dy = -2;$/;"	variable	line:12
+drawBall	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawBall(){$/;"	function	line:15
+drawBall	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawBall(){$/;"	function	line:15
+draw	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function draw(){$/;"	function	line:24
+draw	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function draw(){$/;"	function	line:24
