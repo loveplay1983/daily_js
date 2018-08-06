@@ -1,34 +1,76 @@
-// JavaScript code goes here
-//
-// Initialize the canvas
-//
 var canvas = document.getElementById('myCanvas');
-// The HTMLCanvasElement.getContext() method returns a drawing context on the canvas, or null if the context identifier is not supported.
 var ctx = canvas.getContext('2d');
 
-var x = canvas.width/2;
+var x = canvas.width / 2;
 var y = canvas.height - 30;
+var ballRadius = 10;
 var dx = 2;
 var dy = -2;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width - paddleWidth) / 2;
+var leftPressed = false;
+var rightPressed = false;
 
-// daraw the ball
-function drawBall(){
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
+
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = true;
+  } else if (e.keyCode == 37) {
+    leftPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = false;
+  } else if (e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
+
+function drawBall() {
   ctx.beginPath();
-  ctx.arc(x, y, 10, 0, Math.PI * 2);
-  ctx.fillStyle = "#0095DD";
+  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+  // ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = "red";
   ctx.fill();
   ctx.closePath();
 }
 
-// clear the ball trace while drawing the ball
-function draw(){
-  // The CanvasRenderingContext2D.clearRect() method of the Canvas 2D API sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+  // ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = 'black';
+  ctx.fill();
+  ctx.closePath();
+}
+
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // drawing ball
   drawBall();
-  // add or sub x and y 2 pixel each time the draw() is done
+  drawPaddle();
+
+  if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+    dx = -dx;
+  }
+
+  if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+    dy = -dy;
+  }
+
+  if (rightPressed && paddleX < canvas.width - paddleWidth) {
+    paddleX += 7;
+  } else if (leftPressed && paddleX > 0) {
+    paddleX -= 7;
+  }
+
   x += dx;
   y += dy;
+
 }
 
 setInterval(draw, 10);
