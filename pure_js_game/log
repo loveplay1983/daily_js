@@ -1,0 +1,9 @@
+https://www.w3schools.com/graphics/canvas_coordinates.asp
+
+The HTML canvas is a two-dimensional grid.
+
+The upper-left corner of the canvas has the coordinates (0,0)
+
+In the previous chapter, you saw this method used: fillRect(0,0,150,75).
+
+This means: Start at the upper-left corner (0,0) and draw a 150x75 pixels rectangle.

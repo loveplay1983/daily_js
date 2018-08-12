@@ -18,21 +18,6 @@ console.log(paddleX);
 var leftPressed = false;
 var rightPressed = false;
 
-//bricks init
-/*
-Here we've defined the number of rows and columns of bricks , their width and height, the padding between the bricks so they won't touch each other and a top and left offset so they won't start being drawn right from the edge of the Canvas.
- */
-var brickRowCount = 3;
-var brickColumnCount = 5;
-var brickWidth = 75;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
-
-
-
-
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
@@ -82,19 +67,8 @@ function draw() {
     dx = -dx;
   }
 
-  // if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-  //   dy = -dy;
-  // }
-  if (y + dy < ballRadius) {
+  if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
     dy = -dy;
-  } else if (y + dy > canvas.height - ballRadius) {
-    // check whether the ball center x coordinate is in between the length of paddle
-    if (x > paddleX && x < paddleX + paddleWidth) {
-      dy = -dy;
-    } else {
-      alert('Game Over!');
-      document.location.reload();
-    }
   }
 
   // paddle move logic
