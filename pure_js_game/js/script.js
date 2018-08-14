@@ -30,8 +30,64 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
+// define brick body list
+/*
+The code above will loop through the rows and columns and create the new bricks. NOTE that the brick objects will also be used for collision detection purposes later.
+ */
+var bricks = [];
+for (var c = 0; c < brickColumnCount; c++) {
+  bricks[c] = [];
+  for (var r = 0; r < brickRowCount; r++) {
+    bricks[c][r] = {
+      x: 0,
+      y: 0
+    }; // loop through all the [brickX description]bricks and set default values "ZERO"
+  }
+}
 
+// brick drawing logic
+function drawBricks() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < brickRowCount; r++) {
+      /*
 
+      vivid expression of x and y position calculation logic
+
+      c-> column index 0, 1, 2, 3, ...etc
+      r-> row index 0, 1, 2, 3, ...etc
+      with each column and each row, for example col starts from0 and row starts from 0 too,
+
+      0*(brickWidth+brickPadding) + brickOffsetLeft -> the offset distance between left wall the first brickObject,
+      0*(brickHeight+brickPadding) + brickOffsetTop -> the offset distance between top wall and the first brickObject,
+
+      1*(brickWidth+brickPadding) + brickOffsetLeft -> the offset distance between padding + first brick width + left offset to the second brickObject along X axis,
+      1*(brickHeight+brickPadding) + brickOffsetTop -> the offset distance between padding + first brick height + top offset to the secnd brickObject along Y axis,
+
+                      _____1stbrickWidth_____brickPadding  + brickOffsetLeft 2ndbrickWidth
+      |1stbrickHeight|
+      |              |
+      |brickPadding  |
+            +
+      brickOffsetTop
+      2ndbrickHeight
+      .....
+      .
+      .
+      .
+      .
+       */
+      var brickX = (c*(brickWidth+brickPadding)) + brickOffsetLeft;
+      var brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop;
+      bricks[c][r].x = brickX;  // set x and y coordinate to 0
+      bricks[c][r].y = brickY;
+      ctx.beginPath();
+      ctx.rect(brickX, brickY, brickWidth, brickHeight);
+      ctx.fillStyle = '#0095AA';
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+}
 
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
@@ -74,6 +130,7 @@ function draw() {
   // clear ball moving trace
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // draw the ball and paddle on canvas
+  drawBricks();
   drawBall();
   drawPaddle();
 
