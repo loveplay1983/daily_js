@@ -4,35 +4,3 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-canvas	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var canvas = document.getElementById('myCanvas');$/;"	variable	line:1
-ctx	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var ctx = canvas.getContext('2d');$/;"	variable	line:2
-x	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var x = canvas.width \/ 2;$/;"	variable	line:4
-y	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var y = canvas.height - 30;$/;"	variable	line:5
-dx	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var dx = 2;$/;"	variable	line:10
-dy	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var dy = -2;$/;"	variable	line:11
-paddleHeight	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var paddleHeight = 10;$/;"	variable	line:12
-paddleWidth	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var paddleWidth = 75;$/;"	variable	line:13
-leftPressed	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var leftPressed = false;$/;"	variable	line:18
-rightPressed	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var rightPressed = false;$/;"	variable	line:19
-brickRowCount	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickRowCount = 3;$/;"	variable	line:25
-brickColumnCount	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickColumnCount = 5;$/;"	variable	line:26
-brickWidth	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickWidth = 75;$/;"	variable	line:27
-brickHeight	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickHeight = 20;$/;"	variable	line:28
-brickPadding	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickPadding = 10;$/;"	variable	line:29
-brickOffsetTop	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickOffsetTop = 30;$/;"	variable	line:30
-brickOffsetLeft	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var brickOffsetLeft = 30;$/;"	variable	line:31
-bricks	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^var bricks = [];$/;"	variable	line:37
-bricks.x	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^    bricks[c][r] = {$/;"	property	line:41
-bricks.y	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^      x: 0,$/;"	property	line:42
-drawBricks	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawBricks() {$/;"	function	line:49
-drawBricks	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawBricks() {$/;"	function	line:49
-keyDownHandler	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function keyDownHandler(e) {$/;"	function	line:95
-keyDownHandler	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function keyDownHandler(e) {$/;"	function	line:95
-keyUpHandler	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function keyUpHandler(e) {$/;"	function	line:103
-keyUpHandler	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function keyUpHandler(e) {$/;"	function	line:103
-drawBall	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawBall() {$/;"	function	line:111
-drawBall	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawBall() {$/;"	function	line:111
-drawPaddle	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawPaddle() {$/;"	function	line:120
-drawPaddle	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function drawPaddle() {$/;"	function	line:120
-draw	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function draw() {$/;"	function	line:129
-draw	/opt/home_ext/love's_project/js/pure_js_game/js/script.js	/^function draw() {$/;"	function	line:129

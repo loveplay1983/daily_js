@@ -34,15 +34,79 @@ var brickOffsetLeft = 30;
 /*
 The code above will loop through the rows and columns and create the new bricks. NOTE that the brick objects will also be used for collision detection purposes later.
  */
+ // bricks list will hold the brichs position as well as their status 0 or 1
 var bricks = [];
 for (var c = 0; c < brickColumnCount; c++) {
   bricks[c] = [];
   for (var r = 0; r < brickRowCount; r++) {
     bricks[c][r] = {
+      // set bricks position and status to 1
       x: 0,
-      y: 0
+      y: 0,
+      status: 1
     }; // loop through all the [brickX description]bricks and set default values "ZERO"
   }
+}
+
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
+
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = true;
+  } else if (e.keyCode == 37) {
+    leftPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = false;
+  } else if (e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
+
+// ball bricks collision detection
+// If the center of the ball is inside the coordinates of one of our bricks, we'll change the direction of the ball. For the center of the ball to be inside the brick, all four of the following statements need to be true
+//
+function collisionDetection() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < brickRowCount; r++) {
+      // define the b variable for storing the brick object
+      // in every loop of the collision detection
+      var b = bricks[c][r];
+      // b.x and b.y stands for each ball with corresponding coordinate
+      // if ball x and y coordinate greater than the center coordinate of ball
+      // or less than the brick width or height
+      if (b.status === 1) {
+        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+          // ball goes down
+          dy = -dy;
+          // switch brick position status to 0
+          b.status = 0;
+        }
+      }
+    }
+  }
+}
+
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+  // ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = "red";
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+  // ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = 'black';
+  ctx.fill();
+  ctx.closePath();
 }
 
 // brick drawing logic
@@ -76,54 +140,19 @@ function drawBricks() {
       .
       .
        */
-      var brickX = (c*(brickWidth+brickPadding)) + brickOffsetLeft;
-      var brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop;
-      bricks[c][r].x = brickX;  // set x and y coordinate to 0
-      bricks[c][r].y = brickY;
-      ctx.beginPath();
-      ctx.rect(brickX, brickY, brickWidth, brickHeight);
-      ctx.fillStyle = '#0095AA';
-      ctx.fill();
-      ctx.closePath();
+      if (bricks[c][r].status === 1) { // draw the bricks if status is 1 , don't draw otherwise.
+        var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+        var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+        bricks[c][r].x = brickX; // set x and y coordinate to 0
+        bricks[c][r].y = brickY;
+        ctx.beginPath();
+        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+        ctx.fillStyle = '#0095AA';
+        ctx.fill();
+        ctx.closePath();
+      }
     }
   }
-}
-
-document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyUpHandler, false);
-
-function keyDownHandler(e) {
-  if (e.keyCode == 39) {
-    rightPressed = true;
-  } else if (e.keyCode == 37) {
-    leftPressed = true;
-  }
-}
-
-function keyUpHandler(e) {
-  if (e.keyCode == 39) {
-    rightPressed = false;
-  } else if (e.keyCode == 37) {
-    leftPressed = false;
-  }
-}
-
-function drawBall() {
-  ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  // ctx.fillStyle = "#0095DD";
-  ctx.fillStyle = "red";
-  ctx.fill();
-  ctx.closePath();
-}
-
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  // ctx.fillStyle = '#0095DD';
-  ctx.fillStyle = 'black';
-  ctx.fill();
-  ctx.closePath();
 }
 
 function draw() {
@@ -133,6 +162,7 @@ function draw() {
   drawBricks();
   drawBall();
   drawPaddle();
+  collisionDetection();
 
   // ball move logic
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
