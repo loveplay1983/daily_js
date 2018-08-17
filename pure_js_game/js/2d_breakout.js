@@ -30,6 +30,9 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
+// score
+var score = 0
+
 // define brick body list
 /*
 The code above will loop through the rows and columns and create the new bricks. NOTE that the brick objects will also be used for collision detection purposes later.
@@ -50,6 +53,7 @@ for (var c = 0; c < brickColumnCount; c++) {
 
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
+document.addEventListener('mousemove', mouseMoveHandler, false);
 
 function keyDownHandler(e) {
   if (e.keyCode == 39) {
@@ -64,6 +68,15 @@ function keyUpHandler(e) {
     rightPressed = false;
   } else if (e.keyCode == 37) {
     leftPressed = false;
+  }
+}
+
+function mouseMoveHandler(e){
+  // e.clientX returns the x position of current mouse location and canvas.offsetLeft is the distance between the page left edge to the canvas left edge, in another words, it represents the mouse pointer starts from the exactly left edge of the canvas
+  //
+  var relativeX = e.clientX - canvas.offsetLeft;
+  if(relativeX > 0 && relativeX < canvas.width){
+    paddleX = relativeX - paddleWidth/2;
   }
 }
 
@@ -85,10 +98,24 @@ function collisionDetection() {
           dy = -dy;
           // switch brick position status to 0
           b.status = 0;
+          // each time the brick is hit, score will be added 1
+          score++;
+          // if all the bricks are hit, notify player the winning message and restart game
+          if(score === brickRowCount * brickColumnCount) {
+            alert('You Win, Nice Work!!!');
+            document.location.reload();
+          }
         }
       }
     }
   }
+}
+
+// draw the score
+function drawScore(){
+  ctx.font = '16px Arial';
+  ctx.fillStyle = '#FFBB33';
+  ctx.fillText('Score: ' + score, 8, 20)
 }
 
 function drawBall() {
@@ -162,6 +189,7 @@ function draw() {
   drawBricks();
   drawBall();
   drawPaddle();
+  drawScore();
   collisionDetection();
 
   // ball move logic

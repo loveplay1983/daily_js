@@ -10,3 +10,6 @@ https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_J
 
 2018.8.14
 I have done the 6th part, will continue tomorrow.
+
+2018. 08. 16 step 7 is updated, looking forward to do more with javascript in gmae development
+phaser and html5 so on.
