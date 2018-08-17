@@ -31,13 +31,16 @@ var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
 // score
-var score = 0
+var score = 0;
+
+// player lives
+var lives = 3;
 
 // define brick body list
 /*
 The code above will loop through the rows and columns and create the new bricks. NOTE that the brick objects will also be used for collision detection purposes later.
  */
- // bricks list will hold the brichs position as well as their status 0 or 1
+// bricks list will hold the brichs position as well as their status 0 or 1
 var bricks = [];
 for (var c = 0; c < brickColumnCount; c++) {
   bricks[c] = [];
@@ -71,12 +74,12 @@ function keyUpHandler(e) {
   }
 }
 
-function mouseMoveHandler(e){
+function mouseMoveHandler(e) {
   // e.clientX returns the x position of current mouse location and canvas.offsetLeft is the distance between the page left edge to the canvas left edge, in another words, it represents the mouse pointer starts from the exactly left edge of the canvas
   //
   var relativeX = e.clientX - canvas.offsetLeft;
-  if(relativeX > 0 && relativeX < canvas.width){
-    paddleX = relativeX - paddleWidth/2;
+  if (relativeX > 0 && relativeX < canvas.width) {
+    paddleX = relativeX - paddleWidth / 2;
   }
 }
 
@@ -101,7 +104,7 @@ function collisionDetection() {
           // each time the brick is hit, score will be added 1
           score++;
           // if all the bricks are hit, notify player the winning message and restart game
-          if(score === brickRowCount * brickColumnCount) {
+          if (score === brickRowCount * brickColumnCount) {
             alert('You Win, Nice Work!!!');
             document.location.reload();
           }
@@ -112,10 +115,17 @@ function collisionDetection() {
 }
 
 // draw the score
-function drawScore(){
-  ctx.font = '16px Arial';
+function drawScore() {
+  ctx.font = '20px Arial';
   ctx.fillStyle = '#FFBB33';
-  ctx.fillText('Score: ' + score, 8, 20)
+  ctx.fillText('Score: ' + score, 35, 20)
+}
+
+// draw lives
+function drawLives(){
+  ctx.font = '20px Arial';
+  ctx.fillStyle = 'red';
+  ctx.fillText('Lives: ' + lives, canvas.width - 120, 20);
 }
 
 function drawBall() {
@@ -190,6 +200,7 @@ function draw() {
   drawBall();
   drawPaddle();
   drawScore();
+  drawLives();
   collisionDetection();
 
   // ball move logic
@@ -200,15 +211,25 @@ function draw() {
   // if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
   //   dy = -dy;
   // }
+  // upper boundry
   if (y + dy < ballRadius) {
     dy = -dy;
+    // lower boundry
   } else if (y + dy > canvas.height - ballRadius) {
     // check whether the ball center x coordinate is in between the length of paddle
     if (x > paddleX && x < paddleX + paddleWidth) {
       dy = -dy;
     } else {
-      alert('Game Over!');
-      document.location.reload();
+      lives--;
+      if (!lives) {
+        alert('Game Over!!!');
+        document.location.reload();
+      } else {
+        x = canvas.width / 2;
+        y = canvas.height - 30;
+        dx = 3;
+        dy = -3;
+      }
     }
   }
 
@@ -222,6 +243,8 @@ function draw() {
   x += dx;
   y += dy;
 
+  requestAnimationFrame(draw);
 }
 
-setInterval(draw, 10);
+// setInterval(draw, 10);
+draw();
